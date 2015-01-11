@@ -27,6 +27,7 @@ call(Name, Message, Timeout) ->
     {'DOWN', Ref, process, _, Reason} ->
       exit(Reason)
   after Timeout ->
+    erlang:demonitor(Ref, [flush]),
     exit(timeout)
   end.
 
